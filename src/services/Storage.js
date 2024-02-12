@@ -1,13 +1,16 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export class Storage {
   static key = 'USERS';
   static setUser(data) {
-    return localStorage.setItem('USERS', JSON.stringify(data));
+    return AsyncStorage.setItem('USERS', JSON.stringify(data));
   }
-  static getUser() {
-    const parse = JSON.parse(localStorage.getItem('USERS'));
+  static async getUser() {
+    const parse = JSON.parse(await AsyncStorage.getItem('USERS'));
     return parse;
   }
   static clearUser() {
-    localStorage.removeItem('USERS');
+    return AsyncStorage.removeItem('USERS');
   }
-}
+} //suno yha localstorage se asyncstorage ku
+//localstorage web ke liye bana hian
+//async storge mobile ke liye bana hainok

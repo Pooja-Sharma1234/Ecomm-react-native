@@ -2,6 +2,7 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icons from 'react-native-vector-icons/Entypo';
 import Card from './Card';
+
 import Card1 from './Card';
 import {Images} from '../assets';
 import {useState} from 'react';
@@ -11,6 +12,16 @@ export const CategoryDetails = ({navigation, route}) => {
   const {title} = route.params;
   const backHandler = () => {
     navigation.goBack();
+  };
+
+  const changeItem = type => {
+    switch (type) {
+      case 'pre':
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
@@ -69,10 +80,14 @@ export const CategoryDetails = ({navigation, route}) => {
               // justifyContent: 'space-between',
               padding: 15,
             }}>
-            <TouchableOpacity onPress={backHandler} style={styles.circle}>
+            <TouchableOpacity
+              onPress={() => changeItem('pre')}
+              style={styles.circle}>
               <Icon name="arrow-back" size={30} color="#900" />
             </TouchableOpacity>
-            <TouchableOpacity style={styles.circle}>
+            <TouchableOpacity
+              onPress={() => changeItem('next')}
+              style={styles.circle}>
               <Icon name="arrow-forward" size={30} color="#900" />
             </TouchableOpacity>
           </View>

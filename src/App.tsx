@@ -22,6 +22,8 @@ import {
   TextInput,
 } from 'react-native';
 import {Router} from './routers/Router';
+import {Provider} from 'react-redux';
+import store from './redux/store';
 
 /* 
 
@@ -43,7 +45,11 @@ function App() {
   //  vo code kha gya woh expo tha yeah cli jitne bhi ap bante hain issue use krte hain acha
   //yesh keasa androis emulator hain na sir na paon mtlb  ok jo ab tak mne kiya vse hi hoga isme bhi haaan ok
 
-  return <Router />;
+  return (
+    <Provider store={store}>
+      <Router />
+    </Provider>
+  );
 }
 
 //styleing ayse krte hain

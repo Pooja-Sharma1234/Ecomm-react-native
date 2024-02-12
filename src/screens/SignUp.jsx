@@ -1,10 +1,25 @@
 import {View, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {TextInput} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
+import {Storage} from '../services/Storage';
+import {AuthRepo} from '../services/AuthRepo';
+import {useDispatch} from 'react-redux';
 
 const SignUp = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [userRegistration, setUserRegistration] = useState({
+    username: '',
+    email: '',
+    password: '',
+  });
+  const handleInput = (fld_name, value) => {
+    setUserRegistration({...userRegistration, [fld_name]: value});
+  };
+  const handleSubmit = async () => {
+    dispatch(AuthRepo.signUp(userRegistration));
+  };
   return (
     <View style={{flex: 1}}>
       <Text
@@ -30,6 +45,9 @@ const SignUp = () => {
           borderWidth: 0.5,
           position: 'absolute',
         }}
+        value={userRegistration.username}
+        onChangeText={value => handleInput('username', value)}
+        //aysehi sab ka krna ha itna to kiya tha piche vala rhgya ruko
       />
       <TextInput
         placeholder="Enter Email"
@@ -43,9 +61,12 @@ const SignUp = () => {
           borderWidth: 0.5,
           position: 'absolute',
         }}
+        value={userRegistration.email}
+        onChangeText={value => handleInput('email', value)}
       />
 
       <TextInput
+        secureTextEntry={true}
         placeholder="Enter Password"
         type="password"
         style={{
@@ -57,9 +78,12 @@ const SignUp = () => {
           borderRadius: 10,
           borderWidth: 0.5,
         }}
+        value={userRegistration.password}
+        onChangeText={value => handleInput('password', value)}
       />
       <View>
         <TouchableOpacity
+          onPress={handleSubmit}
           style={{
             backgroundColor: 'black',
             height: 50,
